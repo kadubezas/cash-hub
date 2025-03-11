@@ -1,0 +1,6 @@
+@cash.hub.report.api_HostAddress = http://localhost:5219
+
+GET {{cash.hub.report.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

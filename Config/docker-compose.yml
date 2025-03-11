@@ -1,0 +1,55 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_container
+    restart: always
+    environment:
+      SA_PASSWORD: "Ver1tyChallenge"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  # otel-collector:
+  #   image: otel/opentelemetry-collector-contrib:latest
+  #   container_name: otel-collector
+  #   volumes:
+  #     - ./otel-config.yaml:/etc/otel/config.yaml:ro
+  #   command: ["--config", "/etc/otel/config.yaml"]
+  #   ports:
+  #     - "4317:4317" # OTLP gRPC
+  #     - "4318:4318" # OTLP HTTP
+  #   depends_on:
+  #     - tempo
+
+  # tempo:
+  #   image: grafana/tempo:latest
+  #   container_name: tempo
+  #   command: ["-config.file=/etc/tempo.yaml"]
+  #   volumes:
+  #     - ./tempo.yaml:/etc/tempo.yaml
+  #     - tempo-data:/var/tempo
+  #   ports:
+  #     - "3200:3200" # Tempo HTTP API
+  #     - "4319:4317" # OTLP gRPC Traces (Alterado)
+  #     - "4320:4318" # OTLP HTTP Traces (Alterado)
+
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   container_name: grafana
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=admin
+  #     - GF_DEFAULT_APP_MODE=development
+  #   volumes:
+  #     - grafana-data:/var/lib/grafana
+  #   depends_on:
+  #     - tempo
+
+volumes:
+  grafana-data:
+  tempo-data:
+  sqlserver_data:
+    driver: local
