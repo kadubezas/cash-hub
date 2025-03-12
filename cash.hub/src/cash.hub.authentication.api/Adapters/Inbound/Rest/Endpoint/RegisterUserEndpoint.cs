@@ -1,28 +1,31 @@
 using cash.hub.authentication.api.Adapters.Inbound.Rest.Response;
 using cash.hub.authentication.api.Adapters.Inbound.Rest.Resquest;
+using cash.hub.authentication.api.Application.Common;
+using cash.hub.authentication.api.Application.Common.Dto;
 using cash.hub.authentication.api.Application.Common.Enums;
-using cash.hub.authentication.api.Application.UseCases.TokenJwt;
+using cash.hub.authentication.api.Application.UseCases.UserPort;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cash.hub.authentication.api.Adapters.Inbound.Rest.Endpoint;
 
-public static class AuthenticateEndpoint
+public static class RegisterUserEndpoint
 {
-    public static RouteGroupBuilder MapAuthenticateEndpoint(this RouteGroupBuilder group)
+    public static RouteGroupBuilder MapRegisterEndpoint(this RouteGroupBuilder group)
     {
-        group.MapPost("/authenticate", AuthenticateAsync)
-            .Produces<AuthenticateResponse>(200)
+        group.MapPost("user/register", RegisterUserAsync)
+            .Produces<RegisterUserResponse>(201)
             .Produces<ErrorResponse>(400)
             .Produces<ErrorResponse>(500)
             .WithOpenApi(); 
         return group;  
     }
 
-    private static async Task<IResult> AuthenticateAsync([FromBody] UserRequest userRequest,
-                                                         [FromServices] ITokenJwtUseCase jwtUseCase)
+    private static async Task<IResult> RegisterUserAsync([FromBody] UserRequest userRequest,
+                                                         [FromServices] IUserUseCase useCase)
     {
-        var returnApplication = await jwtUseCase.GenerateJwtTokenAsync(userRequest.UserName, userRequest.Password);
         
+        var returnApplication = await useCase.RegisterAsync(userRequest.UserName, userRequest.Password);
+
         if (!returnApplication.Success)
         {
             var responseError = new ErrorResponse()
@@ -34,12 +37,11 @@ public static class AuthenticateEndpoint
             return Results.Json(responseError, statusCode: returnApplication.ErrorType == ErrorType.Business ? 400 : 500);
         }
 
-        var response = new AuthenticateResponse
+        var succsessMessage = new RegisterUserResponse()
         {
-            Token = returnApplication.Data.Token,
-            Expiration = returnApplication.Data.ExpiresAt
+            Message = returnApplication.Message
         };
         
-        return await Task.FromResult(Results.Ok(response));
+        return await Task.FromResult(Results.Created("",succsessMessage));
     }
 }
