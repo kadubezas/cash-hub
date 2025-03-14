@@ -18,6 +18,7 @@
 - [Importar Collection no Postman](#importar-collection-no-postman)
 - [Funcionamento das APIs](#funcionamento-das-apis)
   - [cash.hub.authentication.api](#cashhubauthenticationapi)
+  - [cash.hub.register.api](#cashhubregisterapi)
 ---
 
 <a id="visao-geral"></a>
@@ -210,3 +211,59 @@ A API retorna erros padronizados para facilitar o diagnóstico de falhas:
 ```
 
 📌 **Os tokens JWT gerados têm expiração de 60 minutos e são utilizados para autenticação nas demais APIs.** 🚀
+
+<a id="cashhubregisterapi"></a>
+### 🔄 cash.hub.register.api
+
+📌 **Autenticação:**
+Todas as requisições para esta API devem incluir um token JWT no cabeçalho `Authorization`.
+
+**Exemplo de cabeçalho:**
+```http
+Authorization: Bearer <seu_token_jwt>
+```
+
+A API de transações é responsável por registrar transações financeiras.
+
+#### 📌 Endpoints principais:
+
+1. **Registrar Transação**
+   - **Endpoint:** `POST /cash/hub/v1/transaction/register`
+   - **Request Body:**
+     ```json
+     {
+       "type": 0,
+       "cashRegisterId": 0,
+       "amount": 0,
+       "paymentMethod": "string",
+       "installments": 0
+     }
+     ```
+   - **Resposta (201 - Created):**
+     ```json
+     {
+       "transactionId": "7b4516f2-9731-45b3-b476-3d87b9f6fafe",
+       "status": 0,
+       "createdAt": "2023-12-18T12:56:00.947Z"
+     }
+     ```
+
+#### 📌 Tratamento de Erros
+A API retorna erros padronizados para facilitar o diagnóstico de falhas:
+
+- **Erro 400 (Bad Request)**: Requisição inválida ou parâmetros incorretos.
+- **Erro 500 (Internal Server Error)**: Erro inesperado no servidor.
+
+📌 **Exemplo de resposta de erro:**
+```json
+{
+  "code": 0,
+  "message": "string",
+  "errors": [
+    {
+      "field": "string",
+      "message": "string"
+    }
+  ]
+}
+```
