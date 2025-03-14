@@ -16,7 +16,8 @@
 - [Diagrama da Arquitetura](#diagrama-da-arquitetura)
 - [Como Rodar as APIs](#como-rodar-as-apis)
 - [Importar Collection no Postman](#importar-collection-no-postman)
-
+- [Funcionamento das APIs](#funcionamento-das-apis)
+  - [cash.hub.authentication.api](#cashhubauthenticationapi)
 ---
 
 <a id="visao-geral"></a>
@@ -140,3 +141,53 @@ A collection do Postman está disponível na pasta `PostmanCollection`. Para fac
 3. **Selecionar a opção "File"** e escolher o arquivo JSON da collection
 4. **Clicar em "Import"** para carregar as rotas das APIs
 5. **Executar as requisições** e validar as respostas
+
+<a id="funcionamento-das-api"></a>
+## 🛠️ Funcionamento das APIs
+
+<a id="cashhubauthenticationapi"></a>
+### 🔐 cash.hub.authentication.api
+
+📌 **Usuário Padrão:**
+Por padrão, a API possui um usuário inicial para testes:
+- **userName:** `admin`
+- **password:** `admin12345`
+
+A API de autenticação é responsável por gerar tokens JWT e gerenciar usuários.
+
+#### 📌 Endpoints principais:
+
+1. **Autenticação (Gerar Token JWT)**
+   - **Endpoint:** `POST /authentication/authenticate`
+   - **Request Body:**
+     ```json
+     {
+       "userName": "string",
+       "password": "string"
+     }
+     ```
+   - **Resposta:**
+     ```json
+     {
+       "token": "eyJhbGciOiJIUzI1NiIsInR...",
+       "Expiration": "2025-03-14T13:48:24.0361437Z"
+     }
+     ```
+
+2. **Registro de Usuário**
+   - **Endpoint:** `POST /authentication/user/register`
+   - **Request Body:**
+     ```json
+     {
+       "userName": "string",
+       "password": "string"
+     }
+     ```
+   - **Resposta:**
+     ```json
+     {
+       "message": "Usuário registrado com sucesso"
+     }
+     ```
+
+📌 **Os tokens JWT gerados têm expiração de 60 minutos e são utilizados para autenticação nas demais APIs.** 🚀
