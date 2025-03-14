@@ -166,7 +166,7 @@ A API de autenticação é responsável por gerar tokens JWT e gerenciar usuári
        "password": "string"
      }
      ```
-   - **Resposta:**
+   - **Resposta(201):**
      ```json
      {
        "token": "eyJhbGciOiJIUzI1NiIsInR...",
@@ -183,11 +183,30 @@ A API de autenticação é responsável por gerar tokens JWT e gerenciar usuári
        "password": "string"
      }
      ```
-   - **Resposta:**
+   - **Resposta(200):**
      ```json
      {
        "message": "Usuário registrado com sucesso"
      }
      ```
+#### 📌 Tratamento de Erros
+A API retorna erros padronizados para facilitar o diagnóstico de falhas:
+
+- **Erro 400 (Bad Request)**: Requisição inválida ou parâmetros incorretos.
+- **Erro 500 (Internal Server Error)**: Erro inesperado no servidor.
+
+📌 **Exemplo de resposta de erro:**
+```json
+{
+  "code": 0,
+  "message": "string",
+  "errors": [
+    {
+      "field": "string",
+      "message": "string"
+    }
+  ]
+}
+```
 
 📌 **Os tokens JWT gerados têm expiração de 60 minutos e são utilizados para autenticação nas demais APIs.** 🚀
