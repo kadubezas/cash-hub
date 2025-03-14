@@ -15,6 +15,7 @@
 - [Benefícios da Arquitetura](#beneficios-da-arquitetura)
 - [Diagrama da Arquitetura](#diagrama-da-arquitetura)
 - [Como Rodar as APIs](#como-rodar-as-apis)
+- [Importar Collection no Postman](#importar-collection-no-postman)
 
 ---
 
@@ -128,3 +129,13 @@ Antes de rodar as APIs, certifique-se de ter instalado:
    - `http://localhost:5231/swagger`
    - `http://localhost:5219/swagger`
 
+<a id="importar-collection-no-postman"></a>
+## 🛠️ Importar Collection no Postman
+
+A collection do Postman está disponível na pasta `PostmanCollection`. Para facilitar os testes das APIs, siga os passos abaixo: Para facilitar os testes das APIs, você pode importar a collection do **Postman** seguindo estes passos:
+
+1. **Abrir o Postman**
+2. **Clicar em "Import"** (no canto superior esquerdo)
+3. **Selecionar a opção "File"** e escolher o arquivo JSON da collection
+4. **Clicar em "Import"** para carregar as rotas das APIs
+5. **Executar as requisições** e validar as respostas
