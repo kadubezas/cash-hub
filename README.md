@@ -326,11 +326,11 @@ A API de transações é responsável por registrar transações financeiras.
    - **Request Body:**
      ```json
      {
-       "type": 0,
+       "type": 0, // 0 Debit, 1 Credit, 2 Refund
        "cashRegisterId": 0,
-       "amount": 0,
-       "paymentMethod": "string",
-       "installments": 0
+       "amount": 50,
+       "paymentMethod": 1, // 0 Cash, 1 CreditCard, 2 DebitCard, 3 Pix, 4 Voucher, 5 Other  
+       "installments": 1
      }
      ```
    - **Resposta (201 - Created):**
@@ -387,10 +387,12 @@ A API de relatórios permite a consulta de transações.
      {
        "transactions": [
          {
-           "transactionId": "7b4516f2-9731-45b3-b476-3d87b9f6fafe",
-           "amount": 0,
-           "status": 0,
-           "createdAt": "2023-12-18T12:56:00.132Z"
+            "transactionId": "ac2e356b-81e0-40e1-9e40-c28b20c561b3",
+            "type": 1,
+            "value": 330.00,
+            "cashRegisterId": 1,
+            "createdAt": "2025-03-14T14:59:43.8285475",
+            "status": 1
          }
        ],
        "pagination": {
