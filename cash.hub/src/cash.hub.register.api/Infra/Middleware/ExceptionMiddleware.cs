@@ -1,4 +1,4 @@
-using cash.hub.authentication.api.Adapters.Inbound.Rest.Response;
+using cash.hub.register.api.Adapters.Inbound.Rest.Responses;
 
 namespace cash.hub.register.api.infra.Middleware;
 

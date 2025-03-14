@@ -1,17 +1,20 @@
+using cash.hub.register.api.Adapters.Outbound.Repository.DataBaseContextConfiguration;
 using cash.hub.register.api.Domain.Entities;
 using cash.hub.register.api.Domain.Ports;
+using Microsoft.EntityFrameworkCore;
 
 namespace cash.hub.register.api.Adapters.Outbound.Repository;
 
-public class TransactionRepository  : ITransactionRepository
+public class TransactionRepository(DataBaseContext context, ILogger<TransactionRepository> logger)  : ITransactionRepository
 {
-    public Task<Transaction> GetTransactionByTransactionIdAsync(string transactionId)
+    public async Task<Transaction?> GetTransactionByTransactionIdAsync(Guid transactionId)
     {
-        throw new NotImplementedException();
+        return await context.Transactions.FirstOrDefaultAsync(t => t.TransactionId == transactionId); 
     }
 
-    public Task AddTransactionAsync(Transaction transaction)
+    public async Task AddTransactionAsync(Transaction transaction)
     {
-        throw new NotImplementedException();
+        context.Transactions.Add(transaction);
+        await context.SaveChangesAsync();
     }
 }

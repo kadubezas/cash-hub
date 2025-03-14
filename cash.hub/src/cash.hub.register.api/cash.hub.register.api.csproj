@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Google.Cloud.PubSub.V1" Version="3.22.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.14" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
             <PrivateAssets>all</PrivateAssets>
@@ -28,11 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Adapters\Inbound\Rest\Endpoints\" />
-      <Folder Include="Adapters\Inbound\Rest\Requests\" />
-      <Folder Include="Application\Common\" />
       <Folder Include="Application\Services\" />
-      <Folder Include="Application\UseCases\" />
     </ItemGroup>
 
 </Project>

@@ -11,6 +11,25 @@ services:
     volumes:
       - sqlserver_data:/var/opt/mssql
 
+  redis:
+    image: redis:latest
+    container_name: redis-cache
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    restart: always
+    ports:
+      - "5540:5540"
+    depends_on:
+      - redis
+
   # otel-collector:
   #   image: otel/opentelemetry-collector-contrib:latest
   #   container_name: otel-collector
@@ -49,7 +68,9 @@ services:
   #     - tempo
 
 volumes:
-  grafana-data:
-  tempo-data:
+  # grafana-data:
+  # tempo-data:
   sqlserver_data:
+    driver: local
+  redis_data:
     driver: local

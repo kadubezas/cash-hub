@@ -1,4 +1,4 @@
-namespace cash.hub.authentication.api.Adapters.Inbound.Rest.Response;
+namespace cash.hub.register.api.Adapters.Inbound.Rest.Responses;
 
 public record struct ErrorResponse
 {
