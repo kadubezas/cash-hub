@@ -29,6 +29,7 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
 - Atua como gateway de entrada, recebendo requisições HTTPs.
 - Encaminha chamadas para os serviços adequados.
 - Implementa Rate Limiting para evitar abusos.
+- Obs: NGINX não foi colocado no compose mas está no desenho da arquitetura original
 
 <a id="authentication-api"></a>
 ### 🔹 **Authentication API**
@@ -47,6 +48,7 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
 - Processa logs de eventos de forma assíncrona.
 - Evita sobrecarga direta no banco de dados.
 - Envia logs para o **Consumer** processá-los antes de armazenar.
+- Obs: Devido ao curto tempo, não consegui implementar essa solução.
 
 <a id="consumer-de-logs"></a>
 ### 🔹 **Consumer de Logs**
@@ -68,6 +70,7 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
 - **OpenTelemetry** coleta métricas e traces.
 - **Prometheus** armazena e processa métricas de desempenho.
 - **Grafana Tempo** exibe dashboards para análise de traces e alertas.
+- Inicialmente, a configuração estava no Docker Compose, mas automatizá-la se mostrou complexa. Para evitar perda de tempo, optei por não incluí-la no ambiente. No entanto, vale ressaltar que as APIs já estão preparadas para exportar traces e métricas, uma exigência essencial em um ambiente de microsserviços.
 
 <a id="fluxo-da-arquitetura"></a>
 ## 🔗 Fluxo da Arquitetura
@@ -119,10 +122,4 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
    - `http://localhost:5066/swagger`
    - `http://localhost:5231/swagger`
    - `http://localhost:5219/swagger`
-
-📌 **Para mais detalhes sobre cada API, consulte a documentação específica de cada serviço.** 🚀
-
-
-
-📌 **Para mais informações, consulte a documentação de cada serviço.** 🚀
 
