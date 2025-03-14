@@ -1,5 +1,20 @@
 # Arquitetura do cash.hub
 
+## 📌 Índice
+- [Visão Geral](#visão-geral)
+- [Componentes da Arquitetura](#componentes-da-arquitetura)
+  - [NGINX (Reverse Proxy)](#nginx-reverse-proxy)
+  - [Authentication API](#authentication-api)
+  - [Authentication Database (SQL Server)](#authentication-database-sql-server)
+  - [Google Pub/Sub (Message Broker para Logs)](#google-pubsub-message-broker-para-logs)
+  - [Consumer de Logs](#consumer-de-logs)
+  - [TransactionLog Database](#transactionlog-database)
+  - [Redis (Cache para Relatórios)](#redis-cache-para-relatórios)
+  - [Monitoring Stack](#monitoring-stack-opentelemetry-prometheus-grafana---tempo)
+- [Fluxo da Arquitetura](#fluxo-da-arquitetura)
+- [Benefícios da Arquitetura](#benefícios-da-arquitetura)
+- [Diagrama da Arquitetura](#diagrama-da-arquitetura)
+
 ## 📜 Visão Geral
 A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabilidade e monitoramento** eficiente dos serviços financeiros. O sistema implementa autenticação JWT, mensageria para logs e uma stack de observabilidade.
 
