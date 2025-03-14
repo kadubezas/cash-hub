@@ -14,6 +14,7 @@
 - [Fluxo da Arquitetura](#fluxo-da-arquitetura)
 - [Benefícios da Arquitetura](#beneficios-da-arquitetura)
 - [Diagrama da Arquitetura](#diagrama-da-arquitetura)
+- [Como Rodar as APIs](#como-rodar-as-apis)
 
 ---
 
@@ -91,6 +92,36 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
 <a id="diagrama-da-arquitetura"></a>
 ## 🖼️ Diagrama da Arquitetura
 ![Arquitetura cash.hub](Images/Cash_Hub_Arquitetura.jpg)
+
+<a id="como-rodar-as-apis"></a>
+## 🚀 Como Rodar as APIs
+
+1. **Clonar o repositório**:
+   ```sh
+   git clone https://github.com/kadubezas/cash-hub.git
+   cd cash-hub
+   ```
+
+2. **Subir os containers do SQL Server e Redis via Docker Compose**:
+   - Os arquivos do **docker-compose** estão na pasta `Config`.
+   ```sh
+   docker-compose -f Config/docker-compose.yml up -d
+   ```
+
+3. **Executar as APIs**:
+   ```sh
+   dotnet run --project src/Authentication.Api
+   dotnet run --project src/CashHub.Report.Api
+   ```
+
+4. **Acessar os endpoints** via Swagger:
+   - `http://localhost:5066/swagger`
+   - `http://localhost:5231/swagger`
+   - `http://localhost:5219/swagger`
+
+📌 **Para mais detalhes sobre cada API, consulte a documentação específica de cada serviço.** 🚀
+
+
 
 📌 **Para mais informações, consulte a documentação de cada serviço.** 🚀
 
