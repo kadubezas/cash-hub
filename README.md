@@ -95,6 +95,11 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
 │   ├── 📂 SwaggerConfig
 ├── 📂 Migrations
 ```
+O projeto utiliza **Minimal API** no .NET 8 para simplificar a implementação dos endpoints REST, tornando a API mais enxuta e performática. Algumas vantagens dessa abordagem incluem:
+
+✅ **Menos código boilerplate**: Sem necessidade de Controllers, tornando o código mais direto.
+✅ **Maior performance**: Como a Minimal API reduz abstrações, há menos sobrecarga e a execução é mais rápida.
+✅ **Facilidade na configuração**: Rotas, middlewares e dependências podem ser registradas de maneira concisa.
 
 <a id="componentes-da-arquitetura"></a>
 ## 🏗️ Componentes da Arquitetura
