@@ -110,8 +110,9 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
 
 3. **Executar as APIs**:
    ```sh
-   dotnet run --project src/Authentication.Api
-   dotnet run --project src/CashHub.Report.Api
+   dotnet run --project cash.hub/src/cash.hub.authentication.api
+   dotnet run --project cash.hub/src/cash.hub.register.api
+   dotnet run --project cash.hub/src/cash.hub.report.api
    ```
 
 4. **Acessar os endpoints** via Swagger:
