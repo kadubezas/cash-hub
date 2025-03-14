@@ -154,6 +154,22 @@ O projeto utiliza **Minimal API** no .NET 8 para simplificar a implementação d
 
 <a id="fluxo-da-arquitetura"></a>
 ## 🔗 Fluxo da Arquitetura
+```mermaid
+sequenceDiagram
+    participant Cliente
+    participant AuthAPI as cash.hub.authentication.api
+    participant LancamentoAPI as cash.hub.register.api
+    participant ReportAPI as cash.hub.report.api
+
+    Cliente->>AuthAPI: Solicita Token (Login)
+    AuthAPI-->>Cliente: Retorna Token JWT
+
+    Cliente->>LancamentoAPI: Envia Token + Registra Lançamento (Débito/Crédito)
+    LancamentoAPI-->>Cliente: Confirmação do Lançamento
+
+    Cliente->>ReportAPI: Envia Token + Solicita Relatório Diário
+    ReportAPI-->>Cliente: Retorna Relatório Consolidado
+```
 1. O **Caixa** precisa fazer um lançamento de **débito ou crédito**.
 2. Para acessar a **Cash Register API**, ele precisa se autenticar.
 3. O caixa envia credenciais para a **Authentication API**, que valida no **Authentication Database** e gera um **token JWT**.
