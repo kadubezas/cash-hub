@@ -144,7 +144,7 @@ A collection do Postman está disponível na pasta `PostmanCollection`. Para fac
 5. **Executar as requisições** e validar as respostas
 
 
-<a id="funcionamento-das-api"></a>
+<a id="funcionamento-das-apis"></a>
 ## 🛠️ Funcionamento das APIs
 
 <a id="cashhubauthenticationapi"></a>
