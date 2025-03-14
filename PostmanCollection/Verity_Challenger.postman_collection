@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "4867d25c-f3f3-4be4-8378-0f624653c333",
+		"name": "Verity Challenger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19378626",
+		"_collection_link": "https://los-pix.postman.co/workspace/Trabalho-w3~caab488f-9875-41be-b24d-0c125ade9ecf/collection/19378626-4867d25c-f3f3-4be4-8378-0f624653c333?action=share&source=collection_link&creator=19378626"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Gerar Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"admin\",\r\n  \"password\": \"admin12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5066/authentication/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5066",
+							"path": [
+								"authentication",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"admin\",\r\n  \"password\": \"admin12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5066/authentication/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5066",
+							"path": [
+								"authentication",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cash Hub",
+			"item": [
+				{
+					"name": "Efetivar Lançamento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwiVXNlcklkIjoiOSIsIm5iZiI6MTc0MTg5MDE5NiwiZXhwIjoxNzQxODkzNzk2LCJpYXQiOjE3NDE4OTAxOTYsImlzcyI6ImNhc2guaHViLmF1dGhlbnRpY2F0aW9uLmFwaSIsImF1ZCI6ImNhc2guaHViLmNsaWVudHMifQ.lH2X3zNPyPByLHvQQ7Oqbpj6u9LB9uHWFtTQl_B-K9k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": 1, // 0 Debit, 1 Credit, 2 Refund\r\n  \"value\": 50,\r\n  \"cashRegisterId\": 0,\r\n  \"notes\": \"Prestação Cliente 2334\",\r\n  \"paymentMethod\": 2, // 0 Cash, 1 CreditCard, 2 DebitCard, 3 Pix, 4 Voucher, 5 Other  \r\n  \"installments\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gerar Relatório   Diário Consolidado",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
