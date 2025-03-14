@@ -19,6 +19,7 @@
 - [Funcionamento das APIs](#funcionamento-das-apis)
   - [cash.hub.authentication.api](#cashhubauthenticationapi)
   - [cash.hub.register.api](#cashhubregisterapi)
+  - [cash.hub.report.api](#cashhubreportapi)
 ---
 
 <a id="visao-geral"></a>
@@ -257,6 +258,67 @@ A API retorna erros padronizados para facilitar o diagnóstico de falhas:
 - **Erro 500 (Internal Server Error)**: Erro inesperado no servidor.
 
 📌 **Exemplo de resposta de erro:**
+```json
+{
+  "code": 0,
+  "message": "string",
+  "errors": [
+    {
+      "field": "string",
+      "message": "string"
+    }
+  ]
+}
+```
+<a id="cashhubreportapi"></a>
+### 📊 cash.hub.report.api
+
+📌 **Autenticação:** Todas as requisições para esta API devem incluir um token JWT no cabeçalho `Authorization`.
+
+**Exemplo de cabeçalho:**
+
+```http
+Authorization: Bearer <seu_token_jwt>
+```
+
+A API de relatórios permite a consulta de transações.
+
+#### 📌 Endpoints principais:
+
+1. **Consultar Transações**
+   - **Endpoint:** `GET /cash/v1/transactions`
+   - **Parâmetros Query:**
+     - `date` (string, formato `yyyy-MM-dd`, Obrigatório): Data da transação.
+     - `page` (integer): Página da consulta.
+     - `pageSize` (integer): Quantidade de registros por página.
+   - **Resposta (200 - OK):**
+     ```json
+     {
+       "transactions": [
+         {
+           "transactionId": "7b4516f2-9731-45b3-b476-3d87b9f6fafe",
+           "amount": 0,
+           "status": 0,
+           "createdAt": "2023-12-18T12:56:00.132Z"
+         }
+       ],
+       "pagination": {
+         "page": 1,
+         "pageSize": 0,
+         "totalPages": 0
+       }
+     }
+     ```
+
+#### 📌 Tratamento de Erros
+
+A API retorna erros padronizados para facilitar o diagnóstico de falhas:
+
+- **Erro 400 (Bad Request)**: Requisição inválida ou parâmetros incorretos.
+- **Erro 500 (Internal Server Error)**: Erro inesperado no servidor.
+
+📌 **Exemplo de resposta de erro:**
+
 ```json
 {
   "code": 0,
