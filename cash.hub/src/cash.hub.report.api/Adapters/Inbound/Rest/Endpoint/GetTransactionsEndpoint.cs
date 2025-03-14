@@ -17,7 +17,7 @@ public static class GetTransactionsEndpoint
              .Produces<GetTransactionsResponse>(200)
              .Produces<ErrorResponse>(400)
              .Produces<ErrorResponse>(500)
-             //.RequireAuthorization()
+             .RequireAuthorization()
             .WithOpenApi(); 
         return group;  
     }
@@ -25,7 +25,7 @@ public static class GetTransactionsEndpoint
     private static async Task<IResult> GetTransactionsEndpointAsync([AsParameters] GetTransactionsRequest request,
                                                                     [FromServices] ITransactionUseCase useCase)
     {
-        var pageResponse = await useCase.GetTransactionsAsync(request.Date, request.Page, request.PageSize);
+        var pageResponse = await useCase.GetTransactionsAsync(request.Date, request.Page ?? 1, request.PageSize ?? 20);
 
         var response = new GetTransactionsResponse
         {
@@ -45,6 +45,7 @@ public static class GetTransactionsEndpoint
         {
             TransactionId = transaction.TransactionId,
             Type = (TransactionTypeRequest)transaction.Type,
+            CashRegisterId = transaction.CashRegisterId,
             Value = transaction.Value,
             CreatedAt = transaction.CreatedAt,
             Status = (TransactionStatusRequest)transaction.Status

@@ -25,7 +25,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5066/authentication/authenticate",
+							"raw": "http://localhost:5066/authentication/v1/authenticate",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -33,6 +33,7 @@
 							"port": "5066",
 							"path": [
 								"authentication",
+								"v1",
 								"authenticate"
 							]
 						}
@@ -46,7 +47,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"userName\": \"admin\",\r\n  \"password\": \"admin12345\"\r\n}",
+							"raw": "{\r\n  \"userName\": \"edu\",\r\n  \"password\": \"admin12345d\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,7 +55,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5066/authentication/user/register",
+							"raw": "http://localhost:5066/authentication/v1/user/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -62,6 +63,7 @@
 							"port": "5066",
 							"path": [
 								"authentication",
+								"v1",
 								"user",
 								"register"
 							]
@@ -82,7 +84,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwiVXNlcklkIjoiOSIsIm5iZiI6MTc0MTg5MDE5NiwiZXhwIjoxNzQxODkzNzk2LCJpYXQiOjE3NDE4OTAxOTYsImlzcyI6ImNhc2guaHViLmF1dGhlbnRpY2F0aW9uLmFwaSIsImF1ZCI6ImNhc2guaHViLmNsaWVudHMifQ.lH2X3zNPyPByLHvQQ7Oqbpj6u9LB9uHWFtTQl_B-K9k",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwiVXNlcklkIjoiOSIsIm5iZiI6MTc0MTk2NDM2MiwiZXhwIjoxNzQxOTY3OTYyLCJpYXQiOjE3NDE5NjQzNjIsImlzcyI6ImNhc2guaHViLmF1dGhlbnRpY2F0aW9uLmFwaSIsImF1ZCI6ImNhc2guaHViLmNsaWVudHMifQ.4WO2JzzECRPvjk4w9rfGwcejoc86YeY2YOLRH4f6DRM",
 									"type": "string"
 								}
 							]
@@ -91,12 +93,27 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"type\": 1, // 0 Debit, 1 Credit, 2 Refund\r\n  \"value\": 50,\r\n  \"cashRegisterId\": 0,\r\n  \"notes\": \"Prestação Cliente 2334\",\r\n  \"paymentMethod\": 2, // 0 Cash, 1 CreditCard, 2 DebitCard, 3 Pix, 4 Voucher, 5 Other  \r\n  \"installments\": null\r\n}",
+							"raw": "{\r\n  \"type\": 1, // 0 Debit, 1 Credit, 2 Refund\r\n  \"value\": 123,\r\n  \"cashRegisterId\": 2,\r\n  \"notes\": \"Prestação Cliente 2334\",\r\n  \"paymentMethod\": 1, // 0 Cash, 1 CreditCard, 2 DebitCard, 3 Pix, 4 Voucher, 5 Other  \r\n  \"installments\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
+						},
+						"url": {
+							"raw": "http://localhost:5231/cash/hub/v1/transaction/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5231",
+							"path": [
+								"cash",
+								"hub",
+								"v1",
+								"transaction",
+								"register"
+							]
 						}
 					},
 					"response": []
@@ -104,8 +121,46 @@
 				{
 					"name": "Gerar Relatório   Diário Consolidado",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwiVXNlcklkIjoiOSIsIm5iZiI6MTc0MTk2NDM2MiwiZXhwIjoxNzQxOTY3OTYyLCJpYXQiOjE3NDE5NjQzNjIsImlzcyI6ImNhc2guaHViLmF1dGhlbnRpY2F0aW9uLmFwaSIsImF1ZCI6ImNhc2guaHViLmNsaWVudHMifQ.4WO2JzzECRPvjk4w9rfGwcejoc86YeY2YOLRH4f6DRM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5219/cash/hub/v1/transactions?Date=2025-03-14&Page=2&PageSize=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5219",
+							"path": [
+								"cash",
+								"hub",
+								"v1",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "Date",
+									"value": "2025-03-14"
+								},
+								{
+									"key": "Page",
+									"value": "2"
+								},
+								{
+									"key": "PageSize",
+									"value": "2"
+								}
+							]
+						}
 					},
 					"response": []
 				}

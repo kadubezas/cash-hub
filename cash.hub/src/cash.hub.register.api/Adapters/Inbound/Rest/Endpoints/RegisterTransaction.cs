@@ -1,4 +1,5 @@
 using cash.hub.register.api.Adapters.Inbound.Rest.Common.Enums;
+using cash.hub.register.api.Adapters.Inbound.Rest.Filter;
 using cash.hub.register.api.Adapters.Inbound.Rest.Requests;
 using cash.hub.register.api.Adapters.Inbound.Rest.Responses;
 using cash.hub.register.api.Application.Common.Enums;
@@ -18,6 +19,7 @@ public static class RegisterTransaction
             .Produces<RegisterTransactionResponse>(201)
             .Produces<ErrorResponse>(400)
             .Produces<ErrorResponse>(500)
+            .AddEndpointFilter<ValidationFilter<RegisterTransactionRequest>>()
             .RequireAuthorization()
             .WithOpenApi(); 
         return group;  

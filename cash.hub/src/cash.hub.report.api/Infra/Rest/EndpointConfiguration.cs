@@ -6,7 +6,7 @@ public static class EndpointConfiguration
 {
     public static void UseEndpointConfiguration(this WebApplication app)
     {        
-        var prefix = "cash/v1/";
+        var prefix = "cash/hub/v1/";
 
         app.MapHealthChecks("/health/liveness");
         app.MapHealthChecks("/health/readiness");

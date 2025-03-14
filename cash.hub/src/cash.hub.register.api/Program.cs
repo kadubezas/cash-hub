@@ -1,3 +1,5 @@
+using System.Reflection;
+using System.Validation;
 using cash.hub.register.api.Infra.DependencyInjection;
 using cash.hub.register.api.infra.EntityFramework;
 using cash.hub.register.api.Infra.JwtConfig;
@@ -19,6 +21,7 @@ builder.Services.AddSwaggerConfiguration();
 builder.Services.AddHealthChecks();
 builder.Services.AddDomainConfiguration();
 builder.Services.AddApplicationConfiguration();
+builder.Services.AddFlatValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 

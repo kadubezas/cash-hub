@@ -6,7 +6,7 @@ public static class EndpointConfiguration
 {
     public static void UseEndpointConfiguration(this WebApplication app)
     {        
-        var prefix = "authentication/";
+        var prefix = "authentication/v1";
 
         app.MapHealthChecks("/health/liveness");
         app.MapHealthChecks("/health/readiness");

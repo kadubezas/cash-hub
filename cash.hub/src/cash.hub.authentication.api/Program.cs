@@ -1,10 +1,10 @@
-using System.Diagnostics;
 using cash.hub.authentication.api.infra.DependecyInjection;
 using cash.hub.authentication.api.infra.EntityFramework;
 using cash.hub.authentication.api.Infra.JwtConfig;
 using cash.hub.authentication.api.infra.Middleware;
 using cash.hub.authentication.api.infra.OpenTelemetry;
 using cash.hub.authentication.api.infra.Rest;
+using cash.hub.authentication.api.Infra.SwaggerConfig;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +18,7 @@ builder.Services.AddEntityFrameworkConfiguration(builder.Configuration);
 builder.Services.AddApplicationConfiguration();
 builder.Services.AddDomainConfiguration();
 builder.Services.AddJwtConfiguration(builder.Configuration);
+builder.Services.AddSwaggerConfiguration();
 
 var app = builder.Build();
 

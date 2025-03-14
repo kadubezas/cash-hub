@@ -10,5 +10,4 @@ public record TransationResponse
     public int CashRegisterId { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow; 
     public TransactionStatusRequest Status { get; set; } = TransactionStatusRequest.Pending;
-    public int? RefundedTransactionId { get; set; }
 }
