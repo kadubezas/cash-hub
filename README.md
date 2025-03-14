@@ -23,6 +23,7 @@
 ## 📜 Visao Geral
 A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabilidade e monitoramento** eficiente dos serviços financeiros. O sistema implementa autenticação JWT, mensageria para logs e uma stack de observabilidade.
 
+<a id="componentes-da-arquitetura"></a>
 ## 🏗️ Componentes da Arquitetura
 
 <a id="nginx-reverse-proxy"></a>
