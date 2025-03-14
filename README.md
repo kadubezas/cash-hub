@@ -99,6 +99,11 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
 <a id="como-rodar-as-apis"></a>
 ## 🚀 Como Rodar as APIs
 
+### 📌 Pré-requisitos
+Antes de rodar as APIs, certifique-se de ter instalado:
+- **Docker** (para rodar os containers de SQL Server e Redis)
+- **.NET 8 SDK** (para compilar e executar as APIs)
+
 1. **Clonar o repositório**:
    ```sh
    git clone https://github.com/kadubezas/cash-hub.git
