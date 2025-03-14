@@ -2,6 +2,7 @@
 
 ## 📌 Índice
 - [Visão Geral](#visao-geral)
+- [Estrutura da Arquitetura](#estrutura-da-arquitetura)
 - [Componentes da Arquitetura](#componentes-da-arquitetura)
   - [NGINX (Reverse Proxy)](#nginx-reverse-proxy)
   - [Authentication API](#authentication-api)
@@ -25,6 +26,75 @@
 <a id="visao-geral"></a>
 ## 📜 Visao Geral
 A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabilidade e monitoramento** eficiente dos serviços financeiros. O sistema implementa autenticação JWT, mensageria para logs e uma stack de observabilidade.
+
+<a id="estrutura-da-arquitetura"></a>
+### 🏗️ Estrutura da Arquitetura
+
+1. **Adapters**: Responsável pela comunicação entre a API e os serviços externos.
+   - **Inbound** (Entrada):
+     - `Rest`: Implementação dos endpoints HTTP, incluindo filtros, requests, responses e validações.
+   - **Outbound** (Saída):
+     - `Repository`: Interface de acesso aos dados.
+
+2. **Application**: Camada que contém a lógica de negócio.
+   - `Common`: DTOs, enums e classes de retorno padrão.
+   - `Dto`: Definição de inputs e outputs das requisições.
+   - `Services`: Implementação dos serviços de negócio.
+   - `UseCases`: Casos de uso que orquestram os serviços e regras de negócio.
+
+3. **Domain**: Representação do domínio da aplicação.
+   - `Entities`: Modelos de dados utilizados no sistema.
+   - `Ports`: Definição das portas de entrada e saída seguindo a Clean Architecture.
+
+4. **Infra**: Configurações e implementações técnicas.
+   - `DependencyInjection`: Configuração de injeção de dependências.
+   - `EntityFramework`: Implementação do ORM para acesso ao banco de dados.
+   - `JwtConfig`: Configuração de autenticação JWT.
+   - `Middleware`: Middlewares customizados para tratamento de requisições.
+   - `OpenTelemetry`: Monitoramento e rastreamento distribuído.
+   - `Rest`: Configurações específicas para APIs REST.
+   - `SwaggerConfig`: Configuração da documentação com Swagger.
+
+5. **Migrations**: Gerenciamento de migrações do banco de dados.
+
+### 📂 Estrutura de Pastas
+
+```plaintext
+📦 Projeto
+├── 📂 Adapters
+│   ├── 📂 Inbound (Entrada)
+│   │   ├── 📂 Rest
+│   │   │   ├── 📂 Common
+│   │   │   ├── 📂 Endpoints
+│   │   │   ├── 📂 Filter
+│   │   │   ├── 📂 Requests
+│   │   │   ├── 📂 Responses
+│   │   │   ├── 📂 Validators
+│   ├── 📂 Outbound (Saída)
+│   │   ├── 📂 Repository
+├── 📂 Application
+│   ├── 📂 Common
+│   │   ├── 📂 Dto
+│   │   ├── 📂 Enums
+│   │   ├── 📄 FactoryBaseReturn.cs
+│   ├── 📂 Dto
+│   │   ├── 📂 Inputs
+│   │   ├── 📂 Outputs
+│   ├── 📂 Services
+│   ├── 📂 UseCases
+├── 📂 Domain
+│   ├── 📂 Entities
+│   ├── 📂 Ports
+├── 📂 Infra
+│   ├── 📂 DependencyInjection
+│   ├── 📂 EntityFramework
+│   ├── 📂 JwtConfig
+│   ├── 📂 Middleware
+│   ├── 📂 OpenTelemetry
+│   ├── 📂 Rest
+│   ├── 📂 SwaggerConfig
+├── 📂 Migrations
+```
 
 <a id="componentes-da-arquitetura"></a>
 ## 🏗️ Componentes da Arquitetura
