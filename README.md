@@ -17,48 +17,58 @@
 
 ---
 
+<a id="visao-geral"></a>
 ## 📜 Visao Geral
 A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabilidade e monitoramento** eficiente dos serviços financeiros. O sistema implementa autenticação JWT, mensageria para logs e uma stack de observabilidade.
 
 ## 🏗️ Componentes da Arquitetura
 
+<a id="nginx-reverse-proxy"></a>
 ### 🔹 **NGINX (Reverse Proxy)**
 - Atua como gateway de entrada, recebendo requisições HTTPs.
 - Encaminha chamadas para os serviços adequados.
 - Implementa Rate Limiting para evitar abusos.
 
+<a id="authentication-api"></a>
 ### 🔹 **Authentication API**
 - Responsável por autenticação e geração de tokens JWT.
 - Conecta-se ao **Authentication Database** (SQL Server) para validar usuários.
 - Tokens possuem expiração de **60 minutos**.
 - No futuro, pode ser substituído por **Keycloak** para uma autenticação mais robusta.
 
+<a id="authentication-database-sql-server"></a>
 ### 🔹 **Authentication Database (SQL Server)**
 - Armazena credenciais de usuários de forma segura.
 - Senhas são **hashadas** para maior proteção.
 
+<a id="google-pubsub-message-broker-para-logs"></a>
 ### 🔹 **Google Pub/Sub (Message Broker para Logs)**
 - Processa logs de eventos de forma assíncrona.
 - Evita sobrecarga direta no banco de dados.
 - Envia logs para o **Consumer** processá-los antes de armazenar.
 
+<a id="consumer-de-logs"></a>
 ### 🔹 **Consumer de Logs**
 - Processa mensagens do **Google Pub/Sub**.
 - Insere logs no **TransactionLog Database**.
 
+<a id="transactionlog-database"></a>
 ### 🔹 **TransactionLog Database**
 - Armazena logs processados.
 - Facilita consultas e auditorias de eventos.
 
+<a id="redis-cache-para-relatorios"></a>
 ### 🔹 **Redis (Cache para Relatorios)**
 - Utilizado para otimizar a consulta de relatórios na **CashHub Report API**.
 - Reduz a carga no banco de dados armazenando consultas frequentemente acessadas.
 
+<a id="monitoring-stack-opentelemetry-prometheus-grafana-tempo"></a>
 ### 🔹 **Monitoring Stack (OpenTelemetry, Prometheus, Grafana Tempo)**
 - **OpenTelemetry** coleta métricas e traces.
 - **Prometheus** armazena e processa métricas de desempenho.
 - **Grafana Tempo** exibe dashboards para análise de traces e alertas.
 
+<a id="fluxo-da-arquitetura"></a>
 ## 🔗 Fluxo da Arquitetura
 1. O **Caixa** precisa fazer um lançamento de **débito ou crédito**.
 2. Para acessar a **Cash Register API**, ele precisa se autenticar.
@@ -71,12 +81,14 @@ A arquitetura do **cash.hub** foi projetada para oferecer **segurança, escalabi
 
 📌 *Nota:* Houve a intenção de utilizar **Keycloak** para autenticação, mas devido ao curto prazo, foi implementado JWT manualmente. Futuramente, a adoção do Keycloak pode centralizar e aprimorar a autenticação.
 
+<a id="beneficios-da-arquitetura"></a>
 ## 📌 Beneficios da Arquitetura
 ✅ Maior segurança com autenticação JWT e senhas hashadas.
 ✅ Desacoplamento de logs através de Google Pub/Sub e Consumer.
 ✅ Monitoramento completo com OpenTelemetry, Prometheus e Grafana Tempo.
 ✅ **Cache de relatórios com Redis**, reduzindo consultas repetitivas ao banco de dados.
 
+<a id="diagrama-da-arquitetura"></a>
 ## 🖼️ Diagrama da Arquitetura
 ![Arquitetura cash.hub](Images/Cash_Hub_Arquitetura.jpg)
 
