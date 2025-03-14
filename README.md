@@ -143,6 +143,7 @@ A collection do Postman está disponível na pasta `PostmanCollection`. Para fac
 4. **Clicar em "Import"** para carregar as rotas das APIs
 5. **Executar as requisições** e validar as respostas
 
+
 <a id="funcionamento-das-api"></a>
 ## 🛠️ Funcionamento das APIs
 
@@ -211,6 +212,7 @@ A API retorna erros padronizados para facilitar o diagnóstico de falhas:
 ```
 
 📌 **Os tokens JWT gerados têm expiração de 60 minutos e são utilizados para autenticação nas demais APIs.** 🚀
+
 
 <a id="cashhubregisterapi"></a>
 ### 🔄 cash.hub.register.api
